@@ -116,27 +116,28 @@ print(Ev)
 
 
 
-plt.plot(s1,s3,label='$\sigma_1$ en fonction de $\sigma_3$')  #Ne sigma1 est nul
+plt.plot(s1,s3,label='$\sigma_1$ en fonction de $\sigma_3$')  #! sigma1 est nul
 plt.legend()
 plt.grid(True)
 plt.show()
-plt.plot(P,Q,label='p en fonction de q')
+plt.plot(P,Q,label='p en fonction de q') #! linéaire
 plt.legend()
 plt.grid(True)
 plt.show()
-plt.plot(P,Eps,label='p en fonction de e')
+plt.plot(P,Eps,label='p en fonction de e') #pk pas
 plt.legend()
 plt.grid(True)
 plt.show()
-plt.plot(np.log(P),Eps,label='ln(p) en fonction de e')
+plt.plot(np.log(P),Eps,label='ln(p) en fonction de e') #linéaire mais ok
 plt.legend()
 plt.grid(True)
 plt.show()
-plt.plot(E1,Ev,label='$\epsilon_1$ en fonction de $\epsilon_v$')
+plt.plot(E1,Ev,label='$\epsilon_1$ en fonction de $\epsilon_v$') #pk pas
 plt.legend()
 plt.grid(True)
 plt.show()
-plt.plot(E1,Q,label='$\epsilon_1$ en fonction de q')
+plt.plot(E1,Q,label='$\epsilon_1$ en fonction de q') #pk pas
+
 
 plt.legend()
 plt.grid(True)
