@@ -47,6 +47,9 @@ def sigma1(p,q):
 def sigma3(p,q):
     return p - q/3
 
+def pq2sig(p,q):
+    return np.array([p + 2*q/3, p - q/3 ])
+
 
 
 def ev(epsilon):
@@ -148,17 +151,83 @@ plt.show()
 
 # * Question 2
 #%%
-def CalculQ2():
-    sigma_1i = 10 * 10**3
-    sigma_2i = 0
-    sigma_3i = 0
+def sig2pq(sigma):
+    """ transforme le vecteur contenant sigma1 et sigma3 
+    en u vecteur contenant p et q"""
+    return np.array([(sigma[0] + 2*sigma[1])/3, sigma[0] - sigma[1]])
 
-    sigma_1f = 500 * 10**3
-    sigma_2f = 0
-    sigma_3f = 0
+def loi_non_lineraire_de2pq(dev,deq, p_avt):
+    """ permet d'optenir p et q grâce à la loi non linéaire donnée
+    en fonction de d(epsilon_v) et d(epsilon_p)"""
+    return np.array([(1+e0)/K*p_avt*dev, 3*G*deq])
 
+def loi_Hook_de2pq(dev,deq):
+    """ permet d'optenir p et q grâce à la loi de Hook
+    en fonction de d(epsilon_v) et d(epsilon_p)"""
+    #TODO à faire
+    return np.array([0,0])
+
+
+def loi_non_lineraire_pq2de(dp,dq, p_avt):
+    """ permet d'optenir d(epsilon_v) et d(epsilon_p) 
+    grâce à la loi non linéaire donnée
+    en fonction de p et q """
+    return np.array([(K*dp)/((1+e0)*p_avt), dq/(3*G)])
+
+def loi_Hook_pq2de(dev,deq):
+    """ permet d'optenir d(epsilon_v) et d(epsilon_p) 
+    grâce à la loi de Hook
+    en fonction de p et q """
+    #TODO à faire
+    return np.array([0,0])
+
+def Calcul2(sigma_n,sigma_f,defo_n):
+    """ fait le calcul avec epsilon fixé"""
+    print("calcul 2")
+    print(defo_n)
+    #On différencie les epsilones v et q
+    dev, deq =defo_n[-1]-defo_n[-2]
+
+    #ce qui nous donne les variations de p et qavec la loi non linéaire 
+    dp = (1+e0)/K*sig2pq(sigma_n[-1])[0]*dev
+    dq = 3*G*deq
+
+    #On peut récuperer les valeurs de p et q    
+    p,q = sig2pq(sigma_n[-1])+ np.array([dp,dq])
+    #qui sont transformé en sigma
+    sigma_n.append(pq2sig(p,q))
+
+    while sigma_n[-1][0] < sigma_f[0]:
+        #On fait cela tant que sigma1 est inf à la valeur seuil
+        dev, deq =defo_n[-1]-defo_n[-2]
+        defo_n .append(defo_n[-1] - np.array([pas, 0]))
+
+        dp = (1+e0)/K*sig2pq(sigma_n[-1])[0]*dev
+        dq = 3*G*deq
+
+        p,q = sig2pq(sigma_n[-1])+ np.array([dp,dq])
+
+        sigma_n.append(sigma_n[-1] + pq2sig(p,q))
+        print(sigma_n[-1])
+    return sigma_n, defo_n
+
+
+def Q2():
+    print("q 2")
+    sigma_n = [[10,0]]
     sigma_f = [500e3, 0]
-    sigma_n = []
+
+    defo_n = [np.array([0,0]),
+              np.array([0,0])]
+    defo_f = []
+
+    sigma_n, defo_n=Calcul2(sigma_n,sigma_f, defo_n)
+    print(sigma_n, defo_n)
+
+Q2()
+
+    
+
 
 
 
