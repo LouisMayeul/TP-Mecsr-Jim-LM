@@ -12,10 +12,10 @@ import matplotlib.pyplot as plt
 ######################## Données : #########################
 ############################################################
 
-E = 9 * 10**6
+E = 9 * 10**6 #*MPa
 nu = 0.3
 K = 0.01
-G = 2 * 10**6
+G = 2 * 10**6 #*MPa
 e0 = 0.80
 
 pas = 100
@@ -67,7 +67,8 @@ def e3(ev,eq):
 
 sigma1 = [sigma_1i]
 sigma3 = [sigma_3i]
-epsilon = [[0,0],[0,0]]
+epsilon = [ [0,0],
+            [0,0]]
 
 
 def calcul(sigma1,sigma3,epsilon):
@@ -145,6 +146,19 @@ plt.grid(True)
 plt.show()
 
 
+# * Question 2
+#%%
+def CalculQ2():
+    sigma_1i = 10 * 10**3
+    sigma_2i = 0
+    sigma_3i = 0
+
+    sigma_1f = 500 * 10**3
+    sigma_2f = 0
+    sigma_3f = 0
+
+    sigma_f = [500e3, 0]
+    sigma_n = []
 
 
 
