@@ -1,6 +1,7 @@
+# %%
 # -*- coding: utf-8 -*-
 """
-Created on Mon Jan  3 23:35:03 2022
+Created on Mon Jan  3 23:35:03 2022 
 
 @author: Jim
 """
@@ -114,7 +115,7 @@ for k in range(len(s1)):
 
 print(Ev)
 
-
+#%%
 
 plt.plot(s1,s3,label='$\sigma_1$ en fonction de $\sigma_3$')  #! sigma1 est nul
 plt.legend()
@@ -163,3 +164,5 @@ plt.show()
 
 
 
+
+# %%
