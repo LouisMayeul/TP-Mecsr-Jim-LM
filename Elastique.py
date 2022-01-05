@@ -36,15 +36,19 @@ sigma_3f = 0
 ############################################################
 
 def p(sigma):
+    """ donne la valeur de p en fonction du vecteur sigma = [sigma1, sigma3] """
     return (sigma[0] + 2*sigma[1])/3
 
 def q(sigma):
+    """ donne la valeur de q en fonction du vecteur sigma = [sigma1, sigma3] """
     return sigma[0] - sigma[1]
 
 def sigma1(p,q):
+    """ donne la valeur de sigma1 en fonction de p et q """
     return p + 2*q/3
 
 def sigma3(p,q):
+    """ donne la valeur de sigma3 en fonction de p et q """
     return p - q/3
 
 def pq2sig(p,q):
@@ -53,51 +57,60 @@ def pq2sig(p,q):
 
 
 def ev(epsilon):
+    """ donne la valeur de epsilon_v en fonction du tenseur epsilon """
     return epsilon[0] + 2*epsilon[1]
 
 def eq(epsilon):
+    """ donne la valeur de epsilon_q en fonction du tenseur epsilon """
     return 2*(epsilon[0] - epsilon[1])/3
 
 def e1(ev,eq):
+    """ donne la valeur de epsilon_1 en fonction de epsilon_v et epsilon_q """
     return ev/3 + eq
 
 def e3(ev,eq):
+    """ donne la valeur de epsilon_3 en fonction de epsilon_v et epsilon_q """
     return ev/3 - eq/2
 
 ############################################################
 ####################### Programme : ########################
 ############################################################
 
-sigma1 = [sigma_1i]
-sigma3 = [sigma_3i]
-epsilon = [ [0,0],
-            [0,0]]
-
 
 def calcul(sigma1,sigma3,epsilon):
     
     while sigma1[-1] < sigma_1f :
         
-        sigma_n = [sigma1[-1],sigma3[-1]]
-        sigma1.append(sigma1[-1] + pas)
-        sigma3.append(sigma3[-1])
-        sigma_n1 = [sigma1[-1],sigma3[-1]]
-        dsigma = [sigma_n1[0] - sigma_n[0],sigma_n1[1] - sigma_n[1]]
+        sigma_n = [sigma1[-1],sigma3[-1]] #on récupère la valeur actuelle de sigma
+        sigma1.append(sigma1[-1] + pas) #on augmente sigma1 pas à pas
+        sigma3.append(sigma3[-1]) #on ne change pas la valeur de sigma3
+        sigma_n1 = [sigma1[-1],sigma3[-1]] #on récupère le sigma à l'intant infinitésimal suivant
+        dsigma = [sigma_n1[0] - sigma_n[0],sigma_n1[1] - sigma_n[1]] #on calcul la variation de sigma
         
-        p_n = p(sigma_n1)
-        dp = p(dsigma)
-        dq = q(dsigma)
+        p_n1 = p(sigma_n1) #on calcule p à lintant suivant
+        dp = p(dsigma) #on calcule la variation de p dp en fonction de la variation de sigma dsigma
+        dq = q(dsigma) #on calcule la variation de q dq en fonction de la variation de sigma dsigma
         
-        dev = (K*dp)/((1+e0)*p_n)
-        deq = dq/(3*G)
+        dev = (K*dp)/((1+e0)*p_n1) #on calcule la variation de epsilon_v produite par la vartiation de p selon la loi de Hooke
+        deq = dq/(3*G) #de même pour la variation de epsilon_v
         
+        #on calcule les variations de epsilon_1 et epsilon_3 en fonction des epsilon_v et epsilon_q
         de1 = e1(dev,deq)
         de3 = e3(dev,deq)
         
+        #on rajoute les valeurs de epsilon dans la suite
         epsilon.append([epsilon[-2][0]+de1,epsilon[-2][1]+de3])
         
     return sigma1,sigma3,epsilon
 
+############################################################
+####################### Question 1 : #######################
+############################################################
+
+sigma1 = [sigma_1i]
+sigma3 = [sigma_3i]
+epsilon = [ [0,0],
+            [0,0]]
 
 s1,s3,e = calcul(sigma1, sigma3, epsilon)
 s1.pop(-1)
@@ -117,9 +130,7 @@ for k in range(len(s1)):
     E1.append(e[k][0])
     Ev.append(ev(e[k]))
 
-print(Ev)
-
-#%%
+### Affichage
 
 plt.plot(s1,s3,label='$\sigma_1$ en fonction de $\sigma_3$')  #! sigma1 est nul
 plt.legend()
@@ -148,9 +159,10 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
+############################################################
+####################### Question 2 : #######################
+############################################################
 
-# * Question 2
-#%%
 def sig2pq(sigma):
     """ transforme le vecteur contenant sigma1 et sigma3 
     en u vecteur contenant p et q"""
