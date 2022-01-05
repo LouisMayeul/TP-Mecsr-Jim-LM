@@ -127,7 +127,7 @@ Ev = []
 for k in range(len(s1)):
     P.append(p([s1[k],s3[k]]))
     Q.append(q([s1[k],s3[k]]))
-    Eps.append(e[k][0] + 2*e[k][1])
+    Eps.append(e[k][0] + 2*e[k][1])  #! Ca c'est ev
     E1.append(e[k][0])
     Ev.append(ev(e[k]))
 
@@ -141,7 +141,7 @@ plt.plot(P,Q,label='p en fonction de q') #! linéaire
 plt.legend()
 plt.grid(True)
 plt.show()
-plt.plot(P,Eps,label='p en fonction de e') #pk pas
+plt.plot(P,Eps,label='p en fonction de e') #! PAS E VRAIMENT...pk pas
 plt.legend()
 plt.grid(True)
 plt.show()
