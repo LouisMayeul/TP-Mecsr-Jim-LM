@@ -218,7 +218,7 @@ def Q2():
     sigma_f = [500e3, 0]
 
     defo_n = [np.array([0,0]),
-              np.array([0,0])]
+              np.array([10,0])]
     defo_f = []
 
     sigma_n, defo_n=Calcul2(sigma_n,sigma_f, defo_n)
