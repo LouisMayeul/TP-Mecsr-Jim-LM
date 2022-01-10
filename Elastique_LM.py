@@ -35,7 +35,7 @@ def Maitriser_la_contrainte(linéaire = True):
     sigma_init = 500
 
     Epsilon = [np.array([0,0])]
-    Sigma   = [np.array([0,0])]
+    Sigma   = [np.array([10,0])]
     PQ      = [np.array([0,0])]
     Epsilon_vp = [np.array([0,0])]
 
@@ -57,7 +57,7 @@ def Maitriser_la_contrainte(linéaire = True):
 def Maitriser_contrainte_et_déplacement(linéaire = True):
     pas_eps = 10 #sans unité
     Epsilon = [np.array([0,0])]
-    Sigma   = [np.array([0,0])]
+    Sigma   = [np.array([10,0])]
     PQ      = [np.array([0,0])]
     Epsilon_vp = [np.array([0,0])]
     eps1=0
@@ -67,7 +67,6 @@ def Maitriser_contrainte_et_déplacement(linéaire = True):
         eps_1 = Epsilon[-1][0] + pas_eps
         sig_2 = 0
         sig_1, eps_2 = invPartiel(M) @ np.array([eps_1, sig_2])
-        print(sig_1)
         #stock
         Sigma.append(np.array([sig_1, sig_2]))
         Epsilon.append(np.array([eps_1,eps_2]))
@@ -126,13 +125,13 @@ def print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,title):
     return None
 
 Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_la_contrainte()
-print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi Linéaire - Contrainte")
+print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi de Hooke - Contrainte")
 
 Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_la_contrainte(False)
 print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi non Linéaire - Contrainte")
 
 Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_contrainte_et_déplacement()
-print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi Linéaire - Contrainte et Déplacement")
+print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi de Hooke - Contrainte et Déplacement")
 
 Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_contrainte_et_déplacement(False)
 print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi non Linéaire - Contrainte et Déplacement")
