@@ -226,7 +226,7 @@ def Q2():
     sigma_n, defo_n=Calcul2(sigma_n,sigma_f, defo_n)
     print(sigma_n, defo_n)
 
-Q2()
+#Q2()
 
     
 
