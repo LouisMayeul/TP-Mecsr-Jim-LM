@@ -1,7 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
-from Elastique import pq2sig
+#from Elastique import pq2sig
 
 E = 9 * 10**6 #*MPa
 nu = 0.3
@@ -63,10 +63,10 @@ def Maitriser_contrainte_et_déplacement(linéaire = True):
     eps1=0
     while Sigma[-1][0] < 500 : 
         #calcule
-        M = Me.inv @ H(linéaire, PQ[-1][0]) @ Mp
+        M = np.linalg.inv(Me) @ H(linéaire, PQ[-1][0]) @ Mp
         eps_1 = Epsilon[-1][0] + pas_eps
         sig_2 = 0
-        sig_1, eps_2 = invPartiel(M)@np.array(eps_1, sig_2)
+        sig_1, eps_2 = invPartiel(M) @ np.array([eps_1, sig_2])
         print(sig_1)
         #stock
         Sigma.append(np.array([sig_1, sig_2]))
@@ -79,6 +79,38 @@ def Maitriser_contrainte_et_déplacement(linéaire = True):
 
 def print_graphe(Sigma, Epsilon, PQ, Epsilon_vp):
     #TODO faire la fonction qui affiche tout bien
+    
+    
+    figure = plt.figure(figsize = (12,9)) # pour afficher les 4 courbes en même temps pour mieux comparer les différentes méthodes
+    plt.figure(1)
+    plt.suptitle("Loi de Hooke")
+    
+    plt.subplot(3,2,1)
+    plt.plot(Sigma[:,0],Sigma[:,1],color='#9F00EC')
+    plt.title('$\sigma_1$ en fonction de $\sigma_3$')
+    
+    plt.subplot(3, 2, 2)
+    plt.plot(PQ[:,0],PQ[:,1],color='green')
+    plt.title("p en fonction de q")
+    
+    plt.subplot(3, 2, 3)
+    plt.plot(PQ[:,0],indice_des_vides(Epsilon_vp[:,0]),color='blue') # /!\ il faut remplacer epsilon par e
+    plt.title("p en fonction de e")
+    
+    plt.subplot(3, 2, 4)
+    plt.plot(np.ln(PQ[:,0]),indice_des_vides(Epsilon_vp[:,0]),color='red')
+    plt.title("ln(p) en fonction de e")
+    
+    plt.subplot(3, 2, 5)
+    plt.plot(Epsilon[:,0],Epsilon_vp[:,0],color='red')
+    plt.title("$\epsilon_1$ en fonction de $\epsilon_v$")
+    
+    plt.subplot(3, 2, 6)
+    plt.plot(Epsilon[:,0],PQ[:,1],color='green')
+    plt.title("$\epsilon_1$ en fonction de q")
+    plt.show()
+
+    
     return None
 
 
