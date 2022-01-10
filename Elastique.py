@@ -153,7 +153,7 @@ plt.legend()
 plt.grid(True)
 plt.show()
 
-plt.plot(P,Q,label='p en fonction de q') #! linéaire
+plt.plot(P,Q,label='p en fonction de q') #! linéaire c'est 1/3 c'est logique
 plt.legend()
 plt.grid(True)
 plt.show()
