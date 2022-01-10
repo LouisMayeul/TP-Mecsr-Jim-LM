@@ -31,7 +31,7 @@ def indice_des_vides(ev, e0=e0):
     return -ev(1+e0)+e0
 
 def Maitriser_la_contrainte():
-    pas_sig = 10 #kN
+    pas_sig = np.array([10,0]) #kN
     sigma_init = 500
 
     Epsilon = [np.array([0,0])]
@@ -40,10 +40,20 @@ def Maitriser_la_contrainte():
     Epsilon_vp = [np.array([0,0])]
 
     while Sigma[-1][0]<sigma_init:
+        #calcul
+        sig = Sigma[-1] + pas_sig
+        eps = H_hook@sig 
+    
+        #Stock
+        Sigma.append(sig)
+        Epsilon.append(eps)
+        PQ.append(Mp@sig)
+        Epsilon_vp.append(Me@eps)
 
-        
-    return None
+    return Sigma, Epsilon, PQ, Epsilon_vp
 
+
+#pregunta para théo : el metro de los muetos, ?quitaron los asientos?
 def Maitriser_contrainte_et_déplacement():
     pas_eps = 10 #sans unité
     Epsilon = [np.array([0,0])]
