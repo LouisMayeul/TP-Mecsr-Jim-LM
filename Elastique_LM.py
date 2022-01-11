@@ -34,8 +34,8 @@ def Maitriser_la_contrainte(linéaire = True):
     sigma_max = 500000 
 
     Epsilon = [np.array([0,0])]
-    Sigma   = [np.array([0,0])]
-    PQ      = [np.array([0,0])]
+    Sigma   = [np.array([10,0])]
+    PQ      = [Mp @ Sigma[-1]]
     Epsilon_vp = [np.array([0,0])]
 
     while Sigma[-1][0]<sigma_max:
@@ -79,8 +79,7 @@ def Maitriser_contrainte_et_déplacement(linéaire = True):
 def print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,title):
     #TODO faire la fonction qui affiche tout bien
     
-    
-    figure = plt.figure(figsize = (12,9)) # pour afficher les 4 courbes en même temps pour mieux comparer les différentes méthodes
+    figure = plt.figure(figsize = (20,10)) # pour afficher les 4 courbes en même temps pour mieux comparer les différentes méthodes
     plt.figure(1)
     plt.suptitle(title)
     
@@ -125,13 +124,13 @@ def print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,title):
     return None
 
 Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_la_contrainte()
-print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi Linéaire - Contrainte")
+print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi de Hooke - Contrainte")
 
 Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_la_contrainte(False)
 print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi non Linéaire - Contrainte")
 
 Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_contrainte_et_déplacement()
-print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi Linéaire - Contrainte et Déplacement")
+print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi de Hooke - Contrainte et Déplacement")
 
 Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_contrainte_et_déplacement(False)
 print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi non Linéaire - Contrainte et Déplacement")
