@@ -128,14 +128,14 @@ def print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,title):
 
 
  
-# Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_la_contrainte()
-# print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi de Hooke - Contrainte")
+Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_la_contrainte()
+print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi de Hooke - Contrainte")
 
-# Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_contrainte_et_déplacement()
-# print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi de Hooke - Contrainte et Déplacement")
+Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_contrainte_et_déplacement()
+print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi de Hooke - Contrainte et Déplacement")
 
-# Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_la_contrainte(linéaire = False)
-# print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi non Linéaire - Contrainte")
+Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_la_contrainte(linéaire = False)
+print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi non Linéaire - Contrainte")
 
-# Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_contrainte_et_déplacement(linéaire = False)
-# print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi non Linéaire - Contrainte et Déplacement")
+Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_contrainte_et_déplacement(linéaire = False)
+print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi non Linéaire - Contrainte et Déplacement")
