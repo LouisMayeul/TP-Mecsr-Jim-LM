@@ -2,7 +2,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import time
 
-#from Elastique import pq2sig
 
 E = 9 * 10**6 #*Pa
 nu = 0.3
@@ -86,37 +85,37 @@ def print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,title):
     
     plt.subplot(2, 3, 1)
     plt.plot(Sigma[:,0],Sigma[:,1],color='#9F00EC')
-    plt.title('$\sigma_1$ en fonction de $\sigma_3$')
+    plt.title('$\sigma_3$ en fonction de $\sigma_1$')
     plt.ylabel('$\sigma_3$')
     plt.xlabel('$\sigma_1$')
     
     plt.subplot(2, 3, 2)
     plt.plot(PQ[:,0],PQ[:,1],color='green')
-    plt.title("p en fonction de q")
+    plt.title("q en fonction de p")
     plt.ylabel('q')
     plt.xlabel('p')
     
     plt.subplot(2, 3, 3)
     plt.plot(PQ[10:,0],indice_des_vides(Epsilon_vp[10:,0]),color='blue')
-    plt.title("p en fonction de e")
+    plt.title("e en fonction de p")
     plt.ylabel('e')
     plt.xlabel('p')
     
     plt.subplot(2, 3, 4)
     plt.plot(np.log(PQ[10:,0]),indice_des_vides(Epsilon_vp[10:,0]),color='red')
-    plt.title("ln(p) en fonction de e")
+    plt.title("e en fonction de ln(p)")
     plt.ylabel('e')
     plt.xlabel('ln(p)')
     
     plt.subplot(2, 3, 5)
     plt.plot(Epsilon[10:,0],Epsilon_vp[10:,0],color='red')
-    plt.title("$\epsilon_1$ en fonction de $\epsilon_v$")
-    plt.ylabel('$\epsilon_3$')
+    plt.title("$\epsilon_v$ en fonction de $\epsilon_1$")
+    plt.ylabel('$\epsilon_v$')
     plt.xlabel('$\epsilon_1$')
     
     plt.subplot(2, 3, 6)
     plt.plot(Epsilon[10:,0],PQ[10:,1],color='green')
-    plt.title("$\epsilon_1$ en fonction de q")
+    plt.title("q en fonction de $\epsilon_1$")
     plt.ylabel('q')
     plt.xlabel('$\epsilon_1$')
     plt.show()
@@ -126,16 +125,16 @@ def print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,title):
 
 
 
-
+if __name__ == '__main__':
  
-Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_la_contrainte()
-print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi de Hooke - Contrainte")
+    Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_la_contrainte()
+    print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi de Hooke - Contrainte")
 
-Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_contrainte_et_déplacement()
-print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi de Hooke - Contrainte et Déplacement")
+    Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_contrainte_et_déplacement()
+    print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi de Hooke - Contrainte et Déplacement")
 
-Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_la_contrainte(linéaire = False)
-print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi non Linéaire - Contrainte")
+    Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_la_contrainte(linéaire = False)
+    print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi non Linéaire - Contrainte")
 
-Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_contrainte_et_déplacement(linéaire = False)
-print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi non Linéaire - Contrainte et Déplacement")
+    Sigma, Epsilon, PQ, Epsilon_vp = Maitriser_contrainte_et_déplacement(linéaire = False)
+    print_graphe(Sigma, Epsilon, PQ, Epsilon_vp,"Loi non Linéaire - Contrainte et Déplacement")
